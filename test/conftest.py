@@ -1,6 +1,7 @@
 import ctypes
 import os.path
 import signal
+import socket
 import subprocess
 from distutils.version import LooseVersion
 from time import sleep
@@ -16,6 +17,11 @@ def _set_pdeathsig(sig=signal.SIGTERM):
         return libc.prctl(1, sig)
 
     return callable
+
+
+def _port_in_use(port):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        return s.connect_ex(("127.0.0.1", int(port))) == 0
 
 
 @pytest.fixture(scope="function")
@@ -47,7 +53,16 @@ def broker():
         bufsize=-1,
     )
 
-    sleep(1)
+    sleep_total = 0
+    sleep_time = 0.5
+    while sleep_total < 10:
+        if _port_in_use(8520) and os.path.exists("/tmp/paho_socket_test.sock"):
+            break
+        sleep(sleep_time)
+        sleep_total += sleep_time
+
+    assert _port_in_use(8520)
+    assert os.path.exists("/tmp/paho_socket_test.sock")
 
     yield
 
