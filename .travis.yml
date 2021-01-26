@@ -12,3 +12,10 @@ install:
   - pip install -e '.[dev]'
 script:
   - pytest --cov=paho_socket
+deploy:
+  provider: pypi
+  username: "__token__"
+  password:
+    secure: eFOgRjrB7XUoFl1d4beW3zoFMdh5a+D7rnnHG1RDo3MDHFjyEEHhXvxcoOsSiseLuF1zuohf5O9Ij5tT5raIy5+//QuH251pbmQfOYymhHTLuPyM3793FzmUfhNs3GkeRaKkcPI2o3cBF1I0cIqIn8vC/Uy3STQhcwpU/m/jNdUUzVxE7cxgaiaRvYEEh01B5e5ME+ubyxQOGnOolDJ3CblTgeOds15nz07RsaUHAjOsvGvfuvC1h7BHyGIQ+wxMmdS0+5vdsefYnmxDkXjWA0ewFYVv/81+hnNm1wi9WAGwM8eTHfSmCYP1m1w0zS2z9RTgkc7N1cHqw1Am9+c5dKMLs8m2grOMyPpkfsGAleHP1KMy9bZvptbw9BFaiM7GagjJYSXhBmwtZTPrKIuxt8EQWRycgF63htDMJCCyyHNHvJQH2VCGeZEsMk0mklFeDnoZ928NIlvLI6QDnxXiYLN/k714SGrZQ5fLu+JhnO+8zR8OgpWCODvdkoY8MQ6VY+ik95Err6SfOcD34g53lBoR0lKDIHXuvNAXry7U5ESa094MKNYHnHk+fShMuv2NMvxDolXTZXZsKNEe0Iyn+d4Qbb+uqEitkYQiefMhM6nkwJsk2WlreF13o8jO4P9mvwGLZITDgRMzqQMBpYHcVkTicJ85wMtw1XD35KDfXlc=
+  on:
+    tags: true
