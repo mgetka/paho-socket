@@ -42,6 +42,7 @@ setup(
         "brokers."
     ),
     long_description=readme,
+    long_description_content_type="text/markdown",
     author="Michał Getka",
     author_email="michal.getka@gmail.com",
     url="https://github.com/mgetka/paho-socket",
