@@ -1,6 +1,7 @@
 # pylint: disable=missing-module-docstring,invalid-name
 import os.path
 import sys
+from textwrap import dedent
 
 from setuptools import find_packages, setup
 
@@ -17,15 +18,27 @@ try:
 except FileNotFoundError:
     requirements_dev = []
 
-with open("README.md", "r") as readme_file:
-    readme = readme_file.read()
+with open("README.md", "r") as f:
+    readme = f.read()
 
-sys.path.insert(0, "src")
-from paho_socket import __version__ as version  # pylint: disable=wrong-import-position
+with open("VERSION", "r") as f:
+    version = f.read().strip()
 
 if "TRAVIS_TAG" in os.environ and os.environ["TRAVIS_TAG"] != version:
     print("CI release symbol differs from file defined one!")
     sys.exit(1)
+
+with open("src/paho_socket/version.py", "w") as f:
+    f.write(
+        dedent(
+            """\
+            # pylint: disable=missing-docstring
+            __version__ = "{version}"
+            """.format(
+                version=version
+            )
+        )
+    )
 
 setup(
     name="paho-socket",
