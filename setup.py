@@ -1,6 +1,4 @@
 # pylint: disable=missing-module-docstring,invalid-name
-import os.path
-import sys
 from textwrap import dedent
 
 from setuptools import find_packages, setup
@@ -23,10 +21,6 @@ with open("README.md", "r") as f:
 
 with open("VERSION", "r") as f:
     version = f.read().strip()
-
-if "TRAVIS_TAG" in os.environ and os.environ["TRAVIS_TAG"] != version:
-    print("CI release symbol differs from file defined one!")
-    sys.exit(1)
 
 with open("src/paho_socket/version.py", "w") as f:
     f.write(
