@@ -11,6 +11,10 @@ install:
   - python setup.py develop
   - pip install -e '.[dev]'
 script:
+  - isort .
+  - black .
+  - git diff --exit-code "*.py"
+  - pylint src/paho_socket
   - pytest --cov=paho_socket
 deploy:
   provider: pypi
