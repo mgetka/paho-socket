@@ -1,0 +1,14 @@
+language: python
+python:
+  - 3.7
+addons:
+  apt:
+    sources:
+      - ppa:mosquitto-dev/mosquitto-ppa
+    packages:
+      - mosquitto
+install:
+  - python setup.py develop
+  - pip install -e '.[dev]'
+script:
+  - pytest --cov=paho_socket
