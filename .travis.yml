@@ -4,7 +4,7 @@ python:
 addons:
   apt:
     sources:
-      - ppa:mosquitto-dev/mosquitto-ppa
+      - sourceline: ppa:mosquitto-dev/mosquitto-ppa
     packages:
       - mosquitto
 install:
